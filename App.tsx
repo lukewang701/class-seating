@@ -230,7 +230,7 @@ const App: React.FC = () => {
           setData(prev => {
               const newState = { ...prev.seatingArrangement };
               delete newState[seatId];
-              return { ...prev, seatingArrangement: newState };
+              return { ...prev, newState };
           });
       } else {
           // Toggle Lock status
@@ -567,7 +567,7 @@ const App: React.FC = () => {
                             <div style={{ display: 'flex', flexDirection: 'column', gap: `${gridMetrics.gap}px` }}>
                                 {(currentPage === 'teacherView' ? Array.from({length: data.rows}, (_, i) => data.rows - i) : Array.from({length: data.rows}, (_, i) => i + 1)).map(r => (
                                     <div key={r} style={{ display: 'flex', gap: `${gridMetrics.gap}px` }}>
-                                        {(currentPage === 'teacherView' ? Array.from({length: data.cols}, (_, i) => data.cols - i) : Array.from({length: data.rows}, (_, i) => i + 1)).map(c => {
+                                        {(currentPage === 'teacherView' ? Array.from({length: data.cols}, (_, i) => data.cols - i) : Array.from({length: data.cols}, (_, i) => i + 1)).map(c => {
                                             const seatId = `${r}-${c}`;
                                             return <Seat key={seatId} id={seatId} studentName={data.seatingArrangement[seatId]} isLocked={data.lockedSeats.has(seatId)} isSelected={selectedSeat === seatId} width={gridMetrics.seatW} height={gridMetrics.seatH} fontSize={gridMetrics.fontSize} onClick={handleSeatClick} onDoubleClick={handleSeatDoubleClick} />;
                                         })}
