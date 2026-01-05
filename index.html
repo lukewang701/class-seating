@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>班級座位安排系統</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans TC', 'Microsoft JhengHei', Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Flip Card */
+        .flip-card {
+            background-color: transparent;
+            width: 150px;
+            height: 80px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .flip-card-front {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .flip-card-back {
+            background-color: #ea580c;
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        /* Landscape Warning */
+        #landscape-warning {
+            display: none;
+        }
+        @media only screen and (orientation: portrait) and (max-width: 1024px) {
+            #landscape-warning {
+                display: flex;
+            }
+            #root {
+                display: none;
+            }
+        }
+        
+        @media print {
+            #root { display: none; }
+            #print-area { display: block !important; }
+            @page { size: A4; margin: 1cm; }
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div id="landscape-warning" class="fixed inset-0 z-[9999] bg-black/95 text-white flex flex-col justify-center items-center p-5 text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 mb-5 animate-spin" style="animation-duration: 3s;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+        </svg>
+        <h2 class="text-2xl font-bold mb-4">請將裝置轉為橫向</h2>
+        <p class="text-lg">為了提供最佳的操作體驗，<br>請將您的手機或平板轉為橫式使用。</p>
+    </div>
+    <div id="root"></div>
+    <div id="print-area" style="display: none;"></div>
+</body>
+</html>

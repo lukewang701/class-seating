@@ -1,0 +1,5 @@
+{
+  "name": "『Class Seating Manager』",
+  "description": "A comprehensive class seating arrangement system allowing teachers to configure grid dimensions, input student lists, assign roles, and manage seating charts with drag-and-drop ease.",
+  "requestFramePermissions": []
+}
